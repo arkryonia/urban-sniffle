@@ -20,3 +20,11 @@ func GetSession() *mgo.Session {
 	}
 	return mgoSession.Clone()
 }
+
+// WithCollection holds operation on specific collection
+func WithCollection(collection string, s func(*mgo.Collection) error) error {
+	session := GetSession()
+	defer session.Close()
+	c := session.DB(dbname).C(collection)
+	return s(c)
+}

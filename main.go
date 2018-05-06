@@ -1,19 +1,13 @@
 package main
 
 import (
-	"net/http"
+	"gitlab.com/drxos/rest-api/todos/urls"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-
+	urls.Todo(r)
 	r.Run(":8000")
 }
